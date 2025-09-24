@@ -20,6 +20,12 @@ double bruteForceClosest(const vector<Point>& pts, int& bestI, int& bestJ);
 FILE *srcFP, *destFP;
 long long numLines, *data;
 
+long double dist(const Point& a, const Point& b) {
+    long long dx = a.x - b.x;
+    long long dy = a.y - b.y;
+    return sqrt((long double)dx * dx + (long double)dy * dy);
+}
+
 int main(int argc, char *argv[]) {
     int n = 10000;
     vector<Point> p(n);
@@ -53,11 +59,9 @@ double bruteForceClosest(const vector<Point>& pts, int& bestI, int& bestJ) {
     int n = (int)pts.size();
     for (int i = 0; i < n; ++i) {
         for (int j = i + 1; j < n; ++j) {
-            long long dx = pts[i].x - pts[j].x;
-            long long dy = pts[i].y - pts[j].y;
-            long double dist = sqrt((long double)dx * dx + (long double)dy * dy);
-            if (dist < bestDist) {
-                bestDist = dist;
+            long double d = dist(pts[i], pts[j]);
+            if (d < bestDist) {
+                bestDist = d;
                 bestI = i;
                 bestJ = j;
             }

@@ -6,6 +6,7 @@
 #include <cmath>
 #include <vector>
 #include <iostream>
+#include "point.h"
 
 using namespace std;
 

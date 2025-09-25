@@ -15,12 +15,6 @@ double bruteForceClosest(const vector<Point>& pts, int& bestI, int& bestJ);
 FILE *srcFP, *destFP;
 long long numLines, *data;
 
-long double dist(const Point& a, const Point& b) {
-    long long dx = a.x - b.x;
-    long long dy = a.y - b.y;
-    return sqrt((long double)dx * dx + (long double)dy * dy);
-}
-
 int main(int argc, char *argv[]) {
     int n = 10000;
     vector<Point> p(n);

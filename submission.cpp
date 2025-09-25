@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <cstring>
 #include <cassert>
@@ -7,13 +8,6 @@
 #include <iostream>
 
 using namespace std;
-
-#define BUFSIZE 1000
-
-struct Point {
-    long long x;
-    long long y;
-};
 
 double bruteForceClosest(const vector<Point>& pts, int& bestI, int& bestJ);
 

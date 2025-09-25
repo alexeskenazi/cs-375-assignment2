@@ -11,6 +11,11 @@
 
 using namespace std;
 
+int test1();
+int test2();
+int test3();
+
+int runTest(std::__1::vector<Point> &p);
 
 double bruteForceClosest(const vector<Point>& pts, int& bestI, int& bestJ) {
     long double bestDist = 1e18;  // largest value possible
@@ -95,36 +100,83 @@ double divideAndConquerClosest(const vector<Point>& pts, int& bestI, int& bestJ)
 
 
 int main(int argc, char *argv[]) {
+  test1();
+  test2();
+  test3();
+  return 0;
+}
+
+int test1() {
+    cout << "Test 1: Points in decreasing order\n";
     int n = 10000;
     vector<Point> p(n);
     for (int i = 0; i < n; ++i) {
         p[i].x = n - i;
         p[i].y = n - i;
+        p[i].z = 0;
     }
 
-    int iBest, jBest;
-    clock_t t0 = clock();
-    double bestDist = bruteForceClosest(p, iBest, jBest);
-    clock_t t1 = clock();
+    return runTest(p);
+}
 
-    double ms = 1000.0 * (t1 - t0) / CLOCKS_PER_SEC;
+int test2() {
+    cout << "\nTest 2: Points in increasing order\n";
+    int n = 10000;
+    vector<Point> p(n);
+    int i;
+    for(i=0; i<n; i++) {
+       p[i].x= i*i;
+       p[i].y= 2*i*i;
+       p[i].z= 0;
+    }
 
-    cout << "Brute-force closest pair:\n";
-    cout << "  i = " << iBest << "  (" << p[iBest].x << ", " << p[iBest].y << ")\n";
-    cout << "  j = " << jBest << "  (" << p[jBest].x << ", " << p[jBest].y << ")\n";
-    cout << "  distance = " << bestDist << "\n";
-    cout << "Time (ms): " << ms << "\n";
+    return runTest(p);
+}
 
-    int iBestDC, jBestDC;
-    clock_t t0dc = clock();
-    double bestDistDC = divideAndConquerClosest(p, iBestDC, jBestDC);
-    clock_t t1dc = clock();
-    double msDC = 1000.0 * (t1dc - t0dc) / CLOCKS_PER_SEC;
+int test3() {
+    int n = 20000;
+    vector<Point> p(n);
+    int i;
 
-    cout << "\nDivide and conquer closest pair:\n";
-    cout << "  i = " << iBestDC << "  (" << p[iBestDC].x << ", " << p[iBestDC].y << ")\n";
-    cout << "  j = " << jBestDC << "  (" << p[jBestDC].x << ", " << p[jBestDC].y << ")\n";
-    cout << "  distance = " << bestDistDC << "\n";
-    cout << "Time (ms): " << msDC << "\n";
-    return 0;
+    for(i=0; i<n; i++) {
+       if (i%2==0) {
+          p[i].x= i;
+       } else {
+          p[i].x= -1*i;
+       }
+       p[i].y= int( sqrt( (9999*9999) - ( (i-10000))* (i-10000) ) );
+       p[i].z= 0;
+    }
+
+    return runTest(p);
+}
+
+int runTest(std::__1::vector<Point> &p)
+{
+  int iBest, jBest;
+  clock_t t0 = clock();
+  double bestDist = bruteForceClosest(p, iBest, jBest);
+  clock_t t1 = clock();
+
+  double ms = 1000.0 * (t1 - t0) / CLOCKS_PER_SEC;
+
+  cout << "Brute-force closest pair:\n";
+  cout << "  i = " << iBest << "  (" << p[iBest].x << ", " << p[iBest].y << ")\n";
+  cout << "  j = " << jBest << "  (" << p[jBest].x << ", " << p[jBest].y << ")\n";
+  cout << "  distance = " << bestDist << "\n";
+  cout << "Time (ms): " << ms << "\n";
+
+  int iBestDC, jBestDC;
+  clock_t t0dc = clock();
+  double bestDistDC = divideAndConquerClosest(p, iBestDC, jBestDC);
+  clock_t t1dc = clock();
+  double msDC = 1000.0 * (t1dc - t0dc) / CLOCKS_PER_SEC;
+
+  cout << "\nDivide and conquer closest pair:\n";
+  cout << "  i = " << iBestDC << "  (" << p[iBestDC].x << ", " << p[iBestDC].y << ")\n";
+  cout << "  j = " << jBestDC << "  (" << p[jBestDC].x << ", " << p[jBestDC].y << ")\n";
+  cout << "  distance = " << bestDistDC << "\n";
+  cout << "Time (ms): " << msDC << "\n";
+
+  return 0;
 }

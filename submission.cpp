@@ -221,5 +221,16 @@ int main(int argc, char *argv[]) {
     exit(0);
   }
 
+  vector<Point> p = readPointsFromFile(argv[1]);
+  int iBestBF, jBestBF;
+  double bestDistBF = bruteForceClosest(p, iBestBF, jBestBF);
+  writeOutputFile(argv[2], iBestBF, jBestBF, bestDistBF);
+
+  int iBestDC, jBestDC;
+  double bestDistDC = divideAndConquerClosest(p, iBestDC, jBestDC);
+  writeOutputFile(argv[2], iBestDC, jBestDC, bestDistDC);
+
+
+
   return 0;
 }

@@ -17,7 +17,10 @@ point.o: point.cpp point.h
 	$(CXX) $(CXXFLAGS) -c point.cpp
 
 run: clean submission
-	./submission input.txt output.txt
+	./submission input1.txt output1.txt
+	./submission input2.txt output2.txt
+	./submission input3.txt output3.txt
+	./submission input4.txt output4.txt
 
 test: clean submission
 	./submission test

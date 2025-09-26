@@ -4,14 +4,14 @@ CXXFLAGS = -Wall -g
 
 all: submission
 
-submission: submission.o read_input_file.o point.o
-	$(CXX) $(CXXFLAGS) submission.o read_input_file.o point.o -o submission
+submission: submission.o file_operations.o point.o
+	$(CXX) $(CXXFLAGS) submission.o file_operations.o point.o -o submission
 
 submission.o: submission.cpp
 	$(CXX) $(CXXFLAGS) -c submission.cpp
 
-read_input_file.o: read_input_file.cpp read_input_file.h
-	$(CXX) $(CXXFLAGS) -c read_input_file.cpp
+file_operations.o: file_operations.cpp file_operations.h
+	$(CXX) $(CXXFLAGS) -c file_operations.cpp
 
 point.o: point.cpp point.h
 	$(CXX) $(CXXFLAGS) -c point.cpp

@@ -1,7 +1,6 @@
 #pragma once
 #include <vector>
 #include <string>
-#include <vector>
 #include "point.h"
 using namespace std;
 

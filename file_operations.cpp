@@ -31,6 +31,22 @@ vector<Point> readPointsFromFile(const string& filename) {
 	return points;
 }
 
+// **************************************************************************************************************************************************
+// Note:  i is the index of point P[i]; j is the index of point P[j]; D is the minimum distance between P[i] and P[j].
+// **************************************************************************************************************************************************
+
+void writeOutputFile(const string& filename, int i, int j, long double distance) {
+	ofstream fout(filename);
+	if (!fout) {
+		cerr << "Error: Cannot open file: " << filename << endl;
+		return;
+	}
+	fout << i << " " << j << " " << distance << "\n";
+	fout.close();
+}
+
+
+
 void createInputFile(const string& filename, const vector<Point>& points) {
     int n = 10000;
     ofstream fout(filename);

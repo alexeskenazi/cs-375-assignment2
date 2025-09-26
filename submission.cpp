@@ -201,9 +201,25 @@ int runTest(std::__1::vector<Point> &p) {
 }
 
 int main(int argc, char *argv[]) {
-  test1();
-  test2();
-  test3();
-  test4();
+
+
+  // run tests if "test" argument provided
+  if(argc>1) {
+    if(strcmp(argv[1], "test") == 0) {
+        test1();
+        test2();
+        test3();
+        test4();
+        exit(0);
+    }
+  }
+
+  // check command line args
+  if(argc<3) {
+    printf("Usage: %s <input_file> <output_file>\n", argv[0]);
+    printf("Usage: %s test\n", argv[0]);
+    exit(0);
+  }
+
   return 0;
 }

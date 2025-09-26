@@ -121,7 +121,7 @@ int test2() {
     int i;
     for(i=0; i<n; i++) {
         p[i].x= i*i;
-        p[i].y= 2*i*i;
+        p[i].y= i*i;
         p[i].z= 0;
     }
 

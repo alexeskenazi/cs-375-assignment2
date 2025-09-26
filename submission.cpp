@@ -13,6 +13,7 @@ using namespace std;
 int test1();
 int test2();
 int test3();
+int test4();
 
 int runTest(std::__1::vector<Point> &p);
 
@@ -102,6 +103,7 @@ int main(int argc, char *argv[]) {
   test1();
   test2();
   test3();
+  test4();
   return 0;
 }
 
@@ -152,6 +154,27 @@ int test3() {
     }
 
     createInputFile("input3.txt", p);
+
+    return runTest(p);
+}
+
+int test4() {
+    int n = 20000;
+    vector<Point> p(n);
+    int i;
+
+    for(i=0; i<n; i++) {
+       if (i%2==0) {
+          p[i].x= i * (1 + i/n);
+          p[i].y= i * (1 + 2/n);
+       } else {
+          p[i].x= -1*i * (1.1 + 3/n);
+          p[i].y= -1*i * (1.9 + 4/n);
+       }
+       p[i].z= 0;
+    }
+
+    createInputFile("input4.txt", p);
 
     return runTest(p);
 }

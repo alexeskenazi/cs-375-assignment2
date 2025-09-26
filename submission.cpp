@@ -99,14 +99,6 @@ double divideAndConquerClosest(const vector<Point>& pts, int& bestI, int& bestJ)
 }
 
 
-int main(int argc, char *argv[]) {
-  test1();
-  test2();
-  test3();
-  test4();
-  return 0;
-}
-
 int test1() {
     cout << "Test 1: Points in decreasing order\n";
     int n = 10000;
@@ -205,5 +197,13 @@ int runTest(std::__1::vector<Point> &p) {
   cout << "  distance = " << bestDistDC << "\n";
   cout << "Time (ms): " << msDC << "\n";
 
+  return 0;
+}
+
+int main(int argc, char *argv[]) {
+  test1();
+  test2();
+  test3();
+  test4();
   return 0;
 }

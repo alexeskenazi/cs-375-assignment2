@@ -220,13 +220,33 @@ int main(int argc, char *argv[]) {
     }
 
     vector<Point> p = readPointsFromFile(argv[1]);
-    int iBestBF, jBestBF;
-    double bestDistBF = bruteForceClosest(p, iBestBF, jBestBF);
-    writeOutputFile(argv[2], iBestBF, jBestBF, bestDistBF);
+
+    int iBest, jBest;
+    clock_t t0 = clock();
+    double bestDist = bruteForceClosest(p, iBest, jBest);
+    clock_t t1 = clock();
+
+    double ms = 1000.0 * (t1 - t0) / CLOCKS_PER_SEC;
+    cout << "-------------------------------------------------------\n";
+    cout << "Brute-force closest pair:\n";
+    cout << "  i = " << iBest << "  (" << p[iBest].x << ", " << p[iBest].y << ")\n";
+    cout << "  j = " << jBest << "  (" << p[jBest].x << ", " << p[jBest].y << ")\n";
+    cout << "  distance = " << bestDist << "\n";
+    cout << "Time (ms): " << ms << "\n";
 
     int iBestDC, jBestDC;
+    clock_t t0dc = clock();
     double bestDistDC = divideAndConquerClosest(p, iBestDC, jBestDC);
+    clock_t t1dc = clock();
+    double msDC = 1000.0 * (t1dc - t0dc) / CLOCKS_PER_SEC;
+
+    cout << "\nDivide and conquer closest pair:\n";
+    cout << "  i = " << iBestDC << "  (" << p[iBestDC].x << ", " << p[iBestDC].y << ")\n";
+    cout << "  j = " << jBestDC << "  (" << p[jBestDC].x << ", " << p[jBestDC].y << ")\n";
+    cout << "  distance = " << bestDistDC << "\n";
+    cout << "Time (ms): " << msDC << "\n";
     writeOutputFile(argv[2], iBestDC, jBestDC, bestDistDC);
+
 
     return 0;
 }

@@ -7,6 +7,7 @@
 #include <iostream>
 #include <algorithm>
 #include "point.h"
+#include "read_input_file.h"
 
 using namespace std;
 

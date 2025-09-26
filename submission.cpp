@@ -6,7 +6,6 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
-#include "point.h"
 #include "read_input_file.h"
 
 using namespace std;
@@ -115,6 +114,8 @@ int test1() {
         p[i].y = n - i;
         p[i].z = 0;
     }
+  
+    createInputFile("input1.txt", p);
 
     return runTest(p);
 }
@@ -129,6 +130,8 @@ int test2() {
        p[i].y= 2*i*i;
        p[i].z= 0;
     }
+
+    createInputFile("input2.txt", p);
 
     return runTest(p);
 }
@@ -148,11 +151,12 @@ int test3() {
        p[i].z= 0;
     }
 
+    createInputFile("input3.txt", p);
+
     return runTest(p);
 }
 
-int runTest(std::__1::vector<Point> &p)
-{
+int runTest(std::__1::vector<Point> &p) {
   int iBest, jBest;
   clock_t t0 = clock();
   double bestDist = bruteForceClosest(p, iBest, jBest);

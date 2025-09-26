@@ -5,7 +5,7 @@ CXXFLAGS = -Wall -g
 all: submission
 
 submission: submission.o read_input_file.o
-	$(CXX) $(CXXFLAGS) submission.o -o submission
+	$(CXX) $(CXXFLAGS) submission.o read_input_file.o -o submission
 
 submission.o: submission.cpp
 	$(CXX) $(CXXFLAGS) -c submission.cpp

@@ -31,15 +31,15 @@ vector<Point> readPointsFromFile(const string& filename) {
 	return points;
 }
 
-void createInputFile(const string& filename) {
+void createInputFile(const string& filename, const vector<Point>& points) {
     int n = 10000;
     ofstream fout(filename);
     if (!fout) {
         cerr << "Error: Cannot open file for writing: " << filename << endl;
         return;
     }
-    for (int i = 1; i <= n; ++i) {
-        fout << i << " " << (i * 2) << ((" " + to_string(i * 3))) << "\n";
+    for (int i = 0; i < n; ++i) {
+        fout << points[i].x << " " << points[i].y << " (" << points[i].z << ")\n";
     }
     fout.close();
 }

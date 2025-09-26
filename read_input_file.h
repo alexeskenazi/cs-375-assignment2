@@ -5,4 +5,4 @@
 using namespace std;
 
 vector<Point> readPointsFromFile(const string& filename);
-void createInputFile(const string& filename);
+void createInputFile(const string& filename, const vector<Point>& points);

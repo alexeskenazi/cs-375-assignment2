@@ -108,7 +108,7 @@ int test1() {
         p[i].y = n - i;
         p[i].z = 0;
     }
-  
+
     createInputFile("input1.txt", p);
 
     return runTest(p);
@@ -120,9 +120,9 @@ int test2() {
     vector<Point> p(n);
     int i;
     for(i=0; i<n; i++) {
-       p[i].x= i*i;
-       p[i].y= 2*i*i;
-       p[i].z= 0;
+        p[i].x= i*i;
+        p[i].y= 2*i*i;
+        p[i].z= 0;
     }
 
     createInputFile("input2.txt", p);
@@ -136,13 +136,13 @@ int test3() {
     int i;
 
     for(i=0; i<n; i++) {
-       if (i%2==0) {
-          p[i].x= i;
-       } else {
-          p[i].x= -1*i;
-       }
-       p[i].y= int( sqrt( (9999*9999) - ( (i-10000))* (i-10000) ) );
-       p[i].z= 0;
+        if (i%2==0) {
+            p[i].x= i;
+        } else {
+            p[i].x= -1*i;
+        }
+        p[i].y= int( sqrt( (9999*9999) - ( (i-10000))* (i-10000) ) );
+        p[i].z= 0;
     }
 
     createInputFile("input3.txt", p);
@@ -156,14 +156,14 @@ int test4() {
     int i;
 
     for(i=0; i<n; i++) {
-       if (i%2==0) {
-          p[i].x= i * (1 + i/n);
-          p[i].y= i * (1 + 2/n);
-       } else {
-          p[i].x= -1*i * (1.1 + 3/n);
-          p[i].y= -1*i * (1.9 + 4/n);
-       }
-       p[i].z= 0;
+        if (i%2==0) {
+            p[i].x= i * (1 + i/n);
+            p[i].y= i * (1 + 2/n);
+        } else {
+            p[i].x= -1*i * (1.1 + 3/n);
+            p[i].y= -1*i * (1.9 + 4/n);
+        }
+        p[i].z= 0;
     }
 
     createInputFile("input4.txt", p);
@@ -172,65 +172,61 @@ int test4() {
 }
 
 int runTest(std::__1::vector<Point> &p) {
-  int iBest, jBest;
-  clock_t t0 = clock();
-  double bestDist = bruteForceClosest(p, iBest, jBest);
-  clock_t t1 = clock();
+    int iBest, jBest;
+    clock_t t0 = clock();
+    double bestDist = bruteForceClosest(p, iBest, jBest);
+    clock_t t1 = clock();
 
-  double ms = 1000.0 * (t1 - t0) / CLOCKS_PER_SEC;
+    double ms = 1000.0 * (t1 - t0) / CLOCKS_PER_SEC;
 
-  cout << "Brute-force closest pair:\n";
-  cout << "  i = " << iBest << "  (" << p[iBest].x << ", " << p[iBest].y << ")\n";
-  cout << "  j = " << jBest << "  (" << p[jBest].x << ", " << p[jBest].y << ")\n";
-  cout << "  distance = " << bestDist << "\n";
-  cout << "Time (ms): " << ms << "\n";
+    cout << "Brute-force closest pair:\n";
+    cout << "  i = " << iBest << "  (" << p[iBest].x << ", " << p[iBest].y << ")\n";
+    cout << "  j = " << jBest << "  (" << p[jBest].x << ", " << p[jBest].y << ")\n";
+    cout << "  distance = " << bestDist << "\n";
+    cout << "Time (ms): " << ms << "\n";
 
-  int iBestDC, jBestDC;
-  clock_t t0dc = clock();
-  double bestDistDC = divideAndConquerClosest(p, iBestDC, jBestDC);
-  clock_t t1dc = clock();
-  double msDC = 1000.0 * (t1dc - t0dc) / CLOCKS_PER_SEC;
+    int iBestDC, jBestDC;
+    clock_t t0dc = clock();
+    double bestDistDC = divideAndConquerClosest(p, iBestDC, jBestDC);
+    clock_t t1dc = clock();
+    double msDC = 1000.0 * (t1dc - t0dc) / CLOCKS_PER_SEC;
 
-  cout << "\nDivide and conquer closest pair:\n";
-  cout << "  i = " << iBestDC << "  (" << p[iBestDC].x << ", " << p[iBestDC].y << ")\n";
-  cout << "  j = " << jBestDC << "  (" << p[jBestDC].x << ", " << p[jBestDC].y << ")\n";
-  cout << "  distance = " << bestDistDC << "\n";
-  cout << "Time (ms): " << msDC << "\n";
+    cout << "\nDivide and conquer closest pair:\n";
+    cout << "  i = " << iBestDC << "  (" << p[iBestDC].x << ", " << p[iBestDC].y << ")\n";
+    cout << "  j = " << jBestDC << "  (" << p[jBestDC].x << ", " << p[jBestDC].y << ")\n";
+    cout << "  distance = " << bestDistDC << "\n";
+    cout << "Time (ms): " << msDC << "\n";
 
-  return 0;
+    return 0;
 }
 
 int main(int argc, char *argv[]) {
+    // run tests if "test" argument provided
+    if(argc>1) {
+        if(strcmp(argv[1], "test") == 0) {
+            test1();
+            test2();
+            test3();
+            test4();
+            exit(0);
+        }
+    }
 
-
-  // run tests if "test" argument provided
-  if(argc>1) {
-    if(strcmp(argv[1], "test") == 0) {
-        test1();
-        test2();
-        test3();
-        test4();
+    // check command line args
+    if(argc<3) {
+        printf("Usage: %s <input_file> <output_file>\n", argv[0]);
+        printf("Usage: %s test\n", argv[0]);
         exit(0);
     }
-  }
 
-  // check command line args
-  if(argc<3) {
-    printf("Usage: %s <input_file> <output_file>\n", argv[0]);
-    printf("Usage: %s test\n", argv[0]);
-    exit(0);
-  }
+    vector<Point> p = readPointsFromFile(argv[1]);
+    int iBestBF, jBestBF;
+    double bestDistBF = bruteForceClosest(p, iBestBF, jBestBF);
+    writeOutputFile(argv[2], iBestBF, jBestBF, bestDistBF);
 
-  vector<Point> p = readPointsFromFile(argv[1]);
-  int iBestBF, jBestBF;
-  double bestDistBF = bruteForceClosest(p, iBestBF, jBestBF);
-  writeOutputFile(argv[2], iBestBF, jBestBF, bestDistBF);
+    int iBestDC, jBestDC;
+    double bestDistDC = divideAndConquerClosest(p, iBestDC, jBestDC);
+    writeOutputFile(argv[2], iBestDC, jBestDC, bestDistDC);
 
-  int iBestDC, jBestDC;
-  double bestDistDC = divideAndConquerClosest(p, iBestDC, jBestDC);
-  writeOutputFile(argv[2], iBestDC, jBestDC, bestDistDC);
-
-
-
-  return 0;
+    return 0;
 }

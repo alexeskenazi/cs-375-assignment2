@@ -2,7 +2,7 @@
 
 ## Overview
 
-This program finds the closest pair of points using two different algorithms:
+This program finds the closest pair of points in 3D space using two different algorithms:
 
 1. **Brute Force Algorithm** - O(n²) time complexity
 2. **Divide and Conquer Algorithm** - O(n log n) time complexity
@@ -15,7 +15,7 @@ This program finds the closest pair of points using two different algorithms:
 - `file_operations.h` - File I/O function declarations
 - `file_operations.cpp` - Functions for reading/writing files
 - `makefile` - Build configuration
-- `input1.txt`, `input2.txt`, `input3.txt`, `input4.txt` - Test input files
+- `input2D-*.txt`, `input3D-*.txt` - Test input files for 2D and 3D modes
 
 ## Compilation
 
@@ -42,10 +42,10 @@ make clean
 Example:
 
 ```
-./submission input1.txt output1.txt
+./submission input3D-1.txt output1.txt
 ```
 
-### Run built-in tests and create sample input files
+### Run built-in tests (creates both 2D and 3D input files)
 
 ```
 ./submission test
@@ -67,7 +67,7 @@ x2 y2 (z2)
 ...
 ```
 
-Where x and y are coordinates, and z is optional (set to 0 for 2D).
+Where x, y, and z are the coordinates. The z-value is in parentheses like the assignment sample shows.
 
 ## Output Format
 
@@ -85,12 +85,12 @@ Where:
 
 ## Test Cases
 
-The program includes 4 test cases:
+The program has 4 test cases that create both 2D and 3D versions:
 
-1. **Test 1**: Points in decreasing order (n=10000)
-2. **Test 2**: Points with coordinates i*i (n=10000)
-3. **Test 3**: Points on a negative and postive (maybe a circle?) pattern (n=20000)
-4. **Test 4**: Mixed positive/negative coordinates (n=20000)
+1. **Test 1**: Diagonal points going down (n=10000)
+2. **Test 2**: Points with squared coordinates (n=10000)
+3. **Test 3**: Some kind of circle/spiral pattern (n=20000)
+4. **Test 4**: Mix of positive and negative coordinates (n=20000)
 
 ## Algorithm Details
 
@@ -106,6 +106,7 @@ The program includes 4 test cases:
 - Finds closest pairs in each half
 - Checks strip between halves for closer pairs
 - Time Complexity: O(n log n)
+- A great short video explaining the algo can be found here [Closest Pair of Points (Divide and Conquer) Explained](https://www.youtube.com/watch?v=6u_hWxbOc7E)
 
 ## Performance Comparison
 

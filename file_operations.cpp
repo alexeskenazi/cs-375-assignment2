@@ -18,7 +18,7 @@ vector<Point> readPointsFromFile(const string& filename) {
         // Skip empty lines and comments
         if (line[0] == '\n' || line[0] == '\0' || line[0] == '*' || line[0] == ':') continue;
         long long x, y, z = 0;
-        int numRead = sscanf(line, "%lld %lld %lld", &x, &y, &z);
+        int numRead = sscanf(line, "%lld %lld (%lld)", &x, &y, &z);
         if (numRead >= 2) {
             Point pt;
             pt.x = x;
@@ -55,7 +55,7 @@ void createInputFile3D(const string& filename, const vector<Point>& points) {
         return;
     }
     for (int i = 0; i < n; ++i) {
-        fout << points[i].x << " " << points[i].y << " " << points[i].z << "\n";
+        fout << points[i].x << " " << points[i].y << " (" << points[i].z << ")\n";
     }
     fout.close();
 }
@@ -69,7 +69,7 @@ void createInputFile2D(const string& filename, const vector<Point>& points) {
         return;
     }
     for (int i = 0; i < n; ++i) {
-        fout << points[i].x << " " << points[i].y << " " << 0 << "\n";
+        fout << points[i].x << " " << points[i].y << " (" << 0 << ")\n";
     }
     fout.close();
 }

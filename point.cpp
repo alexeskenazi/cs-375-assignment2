@@ -12,5 +12,6 @@ bool compareY(const Point& a, const Point& b) {
 long double dist(const Point& a, const Point& b) {
     long long dx = a.x - b.x;
     long long dy = a.y - b.y;
-    return sqrt((long double)dx * dx + (long double)dy * dy);
+    long long dz = a.z - b.z;
+    return sqrt((long double)dx * dx + (long double)dy * dy + (long double)dz * dz);
 }

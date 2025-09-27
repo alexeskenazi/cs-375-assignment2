@@ -47,7 +47,7 @@ void writeOutputFile(const string& filename, int i, int j, long double distance)
 
 
 
-void createInputFile(const string& filename, const vector<Point>& points) {
+void createInputFile3D(const string& filename, const vector<Point>& points) {
     int n = 10000;
     ofstream fout(filename);
     if (!fout) {
@@ -56,6 +56,20 @@ void createInputFile(const string& filename, const vector<Point>& points) {
     }
     for (int i = 0; i < n; ++i) {
         fout << points[i].x << " " << points[i].y << " (" << points[i].z << ")\n";
+    }
+    fout.close();
+}
+
+// writes 0 for z coordinate
+void createInputFile2D(const string& filename, const vector<Point>& points) {
+    int n = 10000;
+    ofstream fout(filename);
+    if (!fout) {
+        cerr << "Error: Cannot open file for writing: " << filename << endl;
+        return;
+    }
+    for (int i = 0; i < n; ++i) {
+        fout << points[i].x << " " << points[i].y << " (" << 0 << ")\n";
     }
     fout.close();
 }

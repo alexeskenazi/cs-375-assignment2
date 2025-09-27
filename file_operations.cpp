@@ -55,7 +55,7 @@ void createInputFile3D(const string& filename, const vector<Point>& points) {
         return;
     }
     for (int i = 0; i < n; ++i) {
-        fout << points[i].x << " " << points[i].y << " (" << points[i].z << ")\n";
+        fout << points[i].x << " " << points[i].y << " " << points[i].z << "\n";
     }
     fout.close();
 }
@@ -69,7 +69,7 @@ void createInputFile2D(const string& filename, const vector<Point>& points) {
         return;
     }
     for (int i = 0; i < n; ++i) {
-        fout << points[i].x << " " << points[i].y << " (" << 0 << ")\n";
+        fout << points[i].x << " " << points[i].y << " " << 0 << "\n";
     }
     fout.close();
 }

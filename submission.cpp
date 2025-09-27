@@ -106,7 +106,7 @@ int test1() {
     for (int i = 0; i < n; ++i) {
         p[i].x = n - i;
         p[i].y = n - i;
-        p[i].z = 0;
+        p[i].z = n - i;  // 3D diagonal
     }
 
     createInputFile("input1.txt", p);
@@ -122,7 +122,7 @@ int test2() {
     for(i=0; i<n; i++) {
         p[i].x= i*i;
         p[i].y= i*i;
-        p[i].z= 0;
+        p[i].z= i;  // 3D curve
     }
 
     createInputFile("input2.txt", p);
@@ -142,7 +142,7 @@ int test3() {
             p[i].x= -1*i;
         }
         p[i].y= int( sqrt( (9999*9999) - ( (i-10000))* (i-10000) ) );
-        p[i].z= 0;
+        p[i].z= i % 100;  // 3D spiral-like pattern
     }
 
     createInputFile("input3.txt", p);
@@ -159,11 +159,12 @@ int test4() {
         if (i%2==0) {
             p[i].x= i * (1 + i/n);
             p[i].y= i * (1 + 2/n);
+            p[i].z= i/10;  // Positive z
         } else {
             p[i].x= -1*i * (1.1 + 3/n);
             p[i].y= -1*i * (1.9 + 4/n);
+            p[i].z= -i/10;  // Negative z
         }
-        p[i].z= 0;
     }
 
     createInputFile("input4.txt", p);
@@ -180,8 +181,8 @@ int runTest(std::__1::vector<Point> &p) {
     double ms = 1000.0 * (t1 - t0) / CLOCKS_PER_SEC;
 
     cout << "Brute-force closest pair:\n";
-    cout << "  i = " << iBest << "  (" << p[iBest].x << ", " << p[iBest].y << ")\n";
-    cout << "  j = " << jBest << "  (" << p[jBest].x << ", " << p[jBest].y << ")\n";
+    cout << "  i = " << iBest << "  (" << p[iBest].x << ", " << p[iBest].y << ", " << p[iBest].z << ")\n";
+    cout << "  j = " << jBest << "  (" << p[jBest].x << ", " << p[jBest].y << ", " << p[jBest].z << ")\n";
     cout << "  distance = " << bestDist << "\n";
     cout << "Time (ms): " << ms << "\n";
 
@@ -192,8 +193,8 @@ int runTest(std::__1::vector<Point> &p) {
     double msDC = 1000.0 * (t1dc - t0dc) / CLOCKS_PER_SEC;
 
     cout << "\nDivide and conquer closest pair:\n";
-    cout << "  i = " << iBestDC << "  (" << p[iBestDC].x << ", " << p[iBestDC].y << ")\n";
-    cout << "  j = " << jBestDC << "  (" << p[jBestDC].x << ", " << p[jBestDC].y << ")\n";
+    cout << "  i = " << iBestDC << "  (" << p[iBestDC].x << ", " << p[iBestDC].y << ", " << p[iBestDC].z << ")\n";
+    cout << "  j = " << jBestDC << "  (" << p[jBestDC].x << ", " << p[jBestDC].y << ", " << p[jBestDC].z << ")\n";
     cout << "  distance = " << bestDistDC << "\n";
     cout << "Time (ms): " << msDC << "\n";
 
@@ -229,8 +230,8 @@ int main(int argc, char *argv[]) {
     double ms = 1000.0 * (t1 - t0) / CLOCKS_PER_SEC;
     cout << "-------------------------------------------------------\n";
     cout << "Brute-force closest pair:\n";
-    cout << "  i = " << iBest << "  (" << p[iBest].x << ", " << p[iBest].y << ")\n";
-    cout << "  j = " << jBest << "  (" << p[jBest].x << ", " << p[jBest].y << ")\n";
+    cout << "  i = " << iBest << "  (" << p[iBest].x << ", " << p[iBest].y << ", " << p[iBest].z << ")\n";
+    cout << "  j = " << jBest << "  (" << p[jBest].x << ", " << p[jBest].y << ", " << p[jBest].z << ")\n";
     cout << "  distance = " << bestDist << "\n";
     cout << "Time (ms): " << ms << "\n";
 
@@ -241,8 +242,8 @@ int main(int argc, char *argv[]) {
     double msDC = 1000.0 * (t1dc - t0dc) / CLOCKS_PER_SEC;
 
     cout << "\nDivide and conquer closest pair:\n";
-    cout << "  i = " << iBestDC << "  (" << p[iBestDC].x << ", " << p[iBestDC].y << ")\n";
-    cout << "  j = " << jBestDC << "  (" << p[jBestDC].x << ", " << p[jBestDC].y << ")\n";
+    cout << "  i = " << iBestDC << "  (" << p[iBestDC].x << ", " << p[iBestDC].y << ", " << p[iBestDC].z << ")\n";
+    cout << "  j = " << jBestDC << "  (" << p[jBestDC].x << ", " << p[jBestDC].y << ", " << p[jBestDC].z << ")\n";
     cout << "  distance = " << bestDistDC << "\n";
     cout << "Time (ms): " << msDC << "\n";
     writeOutputFile(argv[2], iBestDC, jBestDC, bestDistDC);

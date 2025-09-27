@@ -109,7 +109,8 @@ int test1() {
         p[i].z = n - i;  // 3D diagonal
     }
 
-    createInputFile("input1.txt", p);
+    createInputFile3D("input2D-1.txt", p);
+    createInputFile3D("input3D-1.txt", p);
 
     return runTest(p);
 }
@@ -125,7 +126,8 @@ int test2() {
         p[i].z= i;  // 3D curve
     }
 
-    createInputFile("input2.txt", p);
+    createInputFile3D("input2D-2.txt", p);
+    createInputFile3D("input3D-2.txt", p);
 
     return runTest(p);
 }
@@ -145,7 +147,8 @@ int test3() {
         p[i].z= i % 100;  // 3D spiral-like pattern
     }
 
-    createInputFile("input3.txt", p);
+    createInputFile3D("input2D-3.txt", p);
+    createInputFile3D("input3D-3.txt", p);
 
     return runTest(p);
 }
@@ -167,7 +170,8 @@ int test4() {
         }
     }
 
-    createInputFile("input4.txt", p);
+    createInputFile3D("input2D-4.txt", p);
+    createInputFile3D("input3D-4.txt", p);
 
     return runTest(p);
 }

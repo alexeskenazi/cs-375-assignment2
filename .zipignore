@@ -1,0 +1,27 @@
+# Git files
+.git/
+.gitignore
+
+# IDE/Editor files
+.vscode/
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Development/debugging files
+README.md
+prompt.md
+
+# Generated test files (too many, teacher can generate them)
+input2D-*.txt
+input3D-*.txt
+output*.txt
+assignment2_sample-*.txt
+
+# Markdown report (we'll convert to .doc)
+assignment_report.md
+
+# Temporary/backup files
+*.bak
+*.tmp

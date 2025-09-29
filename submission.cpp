@@ -102,9 +102,17 @@ long double closestPairRec(vector<Point>& Px, vector<Point>& Py, int& bestI, int
             if (d_strip < d) {
                 d = d_strip;
                 // Find indices in Px
+                bool found_i = false;
+                bool found_j = false;
                 for (int idx1 = 0; idx1 < n; idx1++) {
-                    if (Px[idx1].x == strip[i].x && Px[idx1].y == strip[i].y) bestI = idx1;
-                    if (Px[idx1].x == strip[j].x && Px[idx1].y == strip[j].y) bestJ = idx1;
+                    if (!found_i && Px[idx1].x == strip[i].x && Px[idx1].y == strip[i].y) {
+                        bestI = idx1;
+                        found_i = true;
+                    }
+                    if (!found_j && Px[idx1].x == strip[j].x && Px[idx1].y == strip[j].y && idx1 != bestI) {
+                        bestJ = idx1;
+                        found_j = true;
+                    }
                 }
             }
         }

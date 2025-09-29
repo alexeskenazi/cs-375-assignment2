@@ -8,6 +8,8 @@
 #include <algorithm>
 #include "file_operations.h"
 
+#define LARGE_NUMBER 1000000000000000000.0
+
 using namespace std;
 
 int test1();
@@ -18,11 +20,11 @@ int test4();
 int runTest(std::__1::vector<Point> &p);
 
 double bruteForceClosest(const vector<Point>& pts, int& bestI, int& bestJ) {
-    long double bestDist = 1e18;  // largest value possible
+    long double bestDist = LARGE_NUMBER;  // largest value possible
     bestI = -1; bestJ = -1;
     int n = (int)pts.size();
-    for (int i = 0; i < n; ++i) {
-        for (int j = i + 1; j < n; ++j) {
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j < n; j++) {
             long double d = dist(pts[i], pts[j]);
             if (d < bestDist) {
                 bestDist = d;
@@ -39,20 +41,40 @@ long double closestPairRec(vector<Point>& Px, vector<Point>& Py, int& bestI, int
     int mid = n / 2;
     Point midPoint = Px[mid];
 
-    vector<Point> Qx(Px.begin(), Px.begin() + mid);
-    vector<Point> Rx(Px.begin() + mid, Px.end());
+    vector<Point> Qx;
+    vector<Point> Rx;
+    
+    // Copy left half
+    for (int i = 0; i < mid; i++) {
+        Qx.push_back(Px[i]);
+    }
+    
+    // Copy right half
+    for (int i = mid; i < n; i++) {
+        Rx.push_back(Px[i]);
+    }
 
     vector<Point> Qy, Ry;
-    for (const auto& p : Py) {
-        if (p.x <= midPoint.x)
-            Qy.push_back(p);
+    for (int i = 0; i < Py.size(); i++) {
+        if (Py[i].x <= midPoint.x)
+            Qy.push_back(Py[i]);
         else
-            Ry.push_back(p);
+            Ry.push_back(Py[i]);
     }
 
     int bestIL = -1, bestJL = -1, bestIR = -1, bestJR = -1;
-    long double dl = (Qx.size() > 1) ? closestPairRec(Qx, Qy, bestIL, bestJL) : 1e18;
-    long double dr = (Rx.size() > 1) ? closestPairRec(Rx, Ry, bestIR, bestJR) : 1e18;
+    long double dl, dr;
+    if (Qx.size() > 1) {
+        dl = closestPairRec(Qx, Qy, bestIL, bestJL);
+    } else {
+        dl = LARGE_NUMBER;
+    }
+    
+    if (Rx.size() > 1) {
+        dr = closestPairRec(Rx, Ry, bestIR, bestJR);
+    } else {
+        dr = LARGE_NUMBER;
+    }
 
     long double d = dl;
     int offset = 0;
@@ -68,19 +90,19 @@ long double closestPairRec(vector<Point>& Px, vector<Point>& Py, int& bestI, int
 
     // Build strip
     vector<Point> strip;
-    for (const auto& p : Py) {
-        if (abs(p.x - midPoint.x) < d)
-            strip.push_back(p);
+    for (int i = 0; i < Py.size(); i++) {
+        if (abs(Py[i].x - midPoint.x) < d)
+            strip.push_back(Py[i]);
     }
 
     // Check strip for closer pairs
-    for (int i = 0; i < (int)strip.size(); ++i) {
-        for (int j = i + 1; j < (int)strip.size() && (strip[j].y - strip[i].y) < d; ++j) {
+    for (int i = 0; i < (int)strip.size(); i++) {
+        for (int j = i + 1; j < (int)strip.size() && (strip[j].y - strip[i].y) < d; j++) {
             long double d_strip = dist(strip[i], strip[j]);
             if (d_strip < d) {
                 d = d_strip;
                 // Find indices in Px
-                for (int idx1 = 0; idx1 < n; ++idx1) {
+                for (int idx1 = 0; idx1 < n; idx1++) {
                     if (Px[idx1].x == strip[i].x && Px[idx1].y == strip[i].y) bestI = idx1;
                     if (Px[idx1].x == strip[j].x && Px[idx1].y == strip[j].y) bestJ = idx1;
                 }
@@ -103,7 +125,7 @@ int test1() {
     cout << "Test 1: Points in decreasing order\n";
     int n = 10000;
     vector<Point> p(n);
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; i++) {
         p[i].x = n - i;
         p[i].y = n - i;
         p[i].z = n - i;  // 3D diagonal
@@ -133,10 +155,12 @@ int test2() {
 }
 
 int test3() {
+    cout << "\nTest 3: Odd positive X and even negative X\n";
     int n = 20000;
     vector<Point> p(n);
     int i;
 
+    // Generate points according to teacher's specification
     for(i=0; i<n; i++) {
         if (i%2==0) {
             p[i].x= i;
@@ -176,7 +200,7 @@ int test4() {
     return runTest(p);
 }
 
-int runTest(std::__1::vector<Point> &p) {
+int runTest(vector<Point> &p) {
     int iBest, jBest;
     clock_t t0 = clock();
     double bestDist = bruteForceClosest(p, iBest, jBest);
